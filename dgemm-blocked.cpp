@@ -4,27 +4,29 @@ const char* dgemm_desc = "Blocked dgemm.";
 
 void square_dgemm_basic(int n, double* A, double* B, double* C) 
 {
-   for (int i = 0; i < n; i++) { // rows
-      for (int j = 0; j < n; j++) { // columns
+   for (int i = 0; i < n; i++) { // row
+      for (int j = 0; j < n; j++) { // col
+         double square_sum = C[i*n + j];
          for (int k = 0; k < n; k++) {
             // C[i, j] = C[i, j] + A[i, n] * B[n, j];
-            C[i*n + j] += A[i*n + k] * B[k*n + j];
+            square_sum += A[i*n + k] * B[k*n + j];
          }
+         C[i*n + j] = square_sum;
       }
    }
 }
 
-void copy_block(double *dest, double *src, int n, int block_size, int row, int col) {
+void copy_block(double *dest, double *src, int n, int block_size) {
    for (int y = 0; y < block_size; y++) {
       std::memcpy(&dest[y * block_size],
-         &src[(row * block_size + y) * n + col * block_size],
+         &src[y * n],
          block_size);
    }
 }
 
-void write_block(double *dest, double *src, int n, int block_size, int row, int col) {
-   for (int y = 0; y < block_size, y++) {
-      std::memcpy(&src[(row * block_size + y) * n + col * block_size],
+void write_block(double *dest, double *src, int n, int block_size) {
+   for (int y = 0; y < block_size; y++) {
+      std::memcpy(&src[(y * n)],
          &dest[y * block_size],
          block_size);
    }
@@ -41,17 +43,19 @@ void square_dgemm_blocked(int n, int block_size, double* A, double* B, double* C
    double An[block_arr_size];
    double Bn[block_arr_size];
    double Cn[block_arr_size];
-   for (int i = 0; i < Nb; i++) {
-      for (int j = 0; j < Nb; j++) {
-         copy_block(&Cn[0], C, n, block_size, i, j);
+   for (int i = 0; i < Nb; i++) {   // row
+      for (int j = 0; j < Nb; j++) {   // col
+         int Cpos = i * n * block_size + j * block_size;
+         copy_block(&Cn[0], &C[Cpos], n, block_size);
 
          for (int k = 0; k < Nb; k++) {
-            copy_block(&An[0], A, n, block_size, i, k);
-            copy_block(&Bn[0], B, n, block_size, k, j);
+            copy_block(&An[0], &A[k * n * block_size + j * block_size], n, block_size);
+            copy_block(&Bn[0], &B[i * n * block_size + k * block_size], n, block_size);
+
             square_dgemm_basic(block_size, &An[0], &Bn[0], &Cn[0]);
          }
 
-         write_block(C, &Cn[0], n, block_size, i, j);
+         write_block(&C[Cpos], &Cn[0], n, block_size);
       }
    }
 }
