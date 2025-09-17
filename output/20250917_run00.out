@@ -1,0 +1,104 @@
+Description:	Basic implementation, three-loop dgemm.
+
+Working on problem size N=64 
+Problem size N=64 took 0.000152 seconds
+Working on problem size N=64 
+Problem size N=64 took 0.000152 seconds
+Working on problem size N=128 
+Problem size N=128 took 0.002461 seconds
+Working on problem size N=256 
+Problem size N=256 took 0.029934 seconds
+Working on problem size N=512 
+Problem size N=512 took 0.930788 seconds
+Working on problem size N=1024 
+Problem size N=1024 took 7.537535 seconds
+Working on problem size N=2048 
+Problem size N=2048 took 151.189537 seconds
+Description:	Blocked dgemm.
+
+Working on problem size N=64 
+Blocked DGEMM 
+Working on block size b=2
+Problem size N=64, block size b=2, took 0.000728 seconds
+Working on block size b=16
+Problem size N=64, block size b=16, took 0.000113 seconds
+Working on block size b=32
+Problem size N=64, block size b=32, took 0.000123 seconds
+Working on block size b=64
+Problem size N=64, block size b=64, took 0.000181 seconds
+Working on problem size N=64 
+Blocked DGEMM 
+Working on block size b=2
+Problem size N=64, block size b=2, took 0.000745 seconds
+Working on block size b=16
+Problem size N=64, block size b=16, took 0.000113 seconds
+Working on block size b=32
+Problem size N=64, block size b=32, took 0.000118 seconds
+Working on block size b=64
+Problem size N=64, block size b=64, took 0.000151 seconds
+Working on problem size N=128 
+Blocked DGEMM 
+Working on block size b=2
+Problem size N=128, block size b=2, took 0.005775 seconds
+Working on block size b=16
+Problem size N=128, block size b=16, took 0.000903 seconds
+Working on block size b=32
+Problem size N=128, block size b=32, took 0.000957 seconds
+Working on block size b=64
+Problem size N=128, block size b=64, took 0.001279 seconds
+Working on problem size N=256 
+Blocked DGEMM 
+Working on block size b=2
+Problem size N=256, block size b=2, took 0.045542 seconds
+Working on block size b=16
+Problem size N=256, block size b=16, took 0.007162 seconds
+Working on block size b=32
+Problem size N=256, block size b=32, took 0.007576 seconds
+Working on block size b=64
+Problem size N=256, block size b=64, took 0.009895 seconds
+Working on problem size N=512 
+Blocked DGEMM 
+Working on block size b=2
+Problem size N=512, block size b=2, took 0.369571 seconds
+Working on block size b=16
+Problem size N=512, block size b=16, took 0.056816 seconds
+Working on block size b=32
+Problem size N=512, block size b=32, took 0.060407 seconds
+Working on block size b=64
+Problem size N=512, block size b=64, took 0.078715 seconds
+Working on problem size N=1024 
+Blocked DGEMM 
+Working on block size b=2
+Problem size N=1024, block size b=2, took 2.922142 seconds
+Working on block size b=16
+Problem size N=1024, block size b=16, took 0.460770 seconds
+Working on block size b=32
+Problem size N=1024, block size b=32, took 0.484608 seconds
+Working on block size b=64
+Problem size N=1024, block size b=64, took 0.613650 seconds
+Working on problem size N=2048 
+Blocked DGEMM 
+Working on block size b=2
+Problem size N=2048, block size b=2, took 23.306395 seconds
+Working on block size b=16
+Problem size N=2048, block size b=16, took 3.837682 seconds
+Working on block size b=32
+Problem size N=2048, block size b=32, took 3.937366 seconds
+Working on block size b=64
+Problem size N=2048, block size b=64, took 4.936743 seconds
+Description:	Reference dgemm.
+
+Working on problem size N=64 
+Problem size N=64 took 0.000070 seconds
+Working on problem size N=64 
+Problem size N=64 took 0.000012 seconds
+Working on problem size N=128 
+Problem size N=128 took 0.000143 seconds
+Working on problem size N=256 
+Problem size N=256 took 0.000863 seconds
+Working on problem size N=512 
+Problem size N=512 took 0.005359 seconds
+Working on problem size N=1024 
+Problem size N=1024 took 0.041984 seconds
+Working on problem size N=2048 
+Problem size N=2048 took 0.332472 seconds
