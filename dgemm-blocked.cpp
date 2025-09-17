@@ -22,15 +22,15 @@ void copy_block(double *dest, double *src, int n, int block_size) {
    for (int y = 0; y < block_size; y++) {
       std::memcpy(&dest[y * block_size],
          &src[y * n],
-         block_size);
+         block_size * sizeof(double));
    }
 }
 
 void write_block(double *dest, double *src, int n, int block_size) {
    for (int y = 0; y < block_size; y++) {
-      std::memcpy(&src[y * block_size],
-         &dest[y * n],
-         block_size);
+      std::memcpy(&dest[y * n],
+         &src[y * block_size],
+         block_size * sizeof(double));
    }
 }
 
