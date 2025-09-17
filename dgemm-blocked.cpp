@@ -14,7 +14,6 @@ void square_dgemm_basic(int n, double* A, double* B, double* C)
          }
          C[i*n + j] = square_sum;
       }
-      printf("\n");
    }
 }
 
