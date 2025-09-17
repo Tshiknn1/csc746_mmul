@@ -73,7 +73,7 @@ int main(int argc, char** argv)
         printf("Blocked DGEMM \n");
         for (int b : block_sizes)
         {
-           printf("Working on block size b=%d\n", b)
+           printf("Working on block size b=%d\n", b);
 #endif
 
            // allocate memory for 6 NxN matrics

@@ -40,9 +40,11 @@ void square_dgemm_blocked(int n, int block_size, double* A, double* B, double* C
 {
    int Nb = n / block_size;
    int block_arr_size = block_size * block_size;
-   double An[block_arr_size];
-   double Bn[block_arr_size];
-   double Cn[block_arr_size];
+
+   double* An = new double[block_arr_size];
+   double* Bn = new double[block_arr_size];
+   double* Cn = new double[block_arr_size];
+
    for (int i = 0; i < Nb; i++) {   // row
       for (int j = 0; j < Nb; j++) {   // col
          int Cpos = i * n * block_size + j * block_size;
@@ -58,4 +60,8 @@ void square_dgemm_blocked(int n, int block_size, double* A, double* B, double* C
          write_block(&C[Cpos], &Cn[0], n, block_size);
       }
    }
+
+   delete[] An;
+   delete[] Bn;
+   delete[] Cn;
 }
