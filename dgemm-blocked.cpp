@@ -14,6 +14,7 @@ void square_dgemm_basic(int n, double* A, double* B, double* C)
          }
          C[i*n + j] = square_sum;
       }
+      printf("\n");
    }
 }
 
@@ -52,8 +53,8 @@ void square_dgemm_blocked(int n, int block_size, double* A, double* B, double* C
          copy_block(&Cn[0], &C[Cpos], n, block_size);
 
          for (int k = 0; k < Nb; k++) {
-            copy_block(An, &A[k * n * block_size + j * block_size], n, block_size);
-            copy_block(Bn, &B[i * n * block_size + k * block_size], n, block_size);
+            copy_block(An, &A[i * n * block_size + k * block_size], n, block_size);
+            copy_block(Bn, &B[k * n * block_size + j * block_size], n, block_size);
 
             square_dgemm_basic(block_size, An, Bn, Cn);
          }
