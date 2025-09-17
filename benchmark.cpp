@@ -109,9 +109,9 @@ int main(int argc, char** argv)
            std::chrono::duration<double> elapsed = end_time - start_time;
 
 #ifdef BLOCKED
-           printf("Problem size N=%ld, block size b=%d, took %lf seconds", n, b, elapsed.count());
+           printf("Problem size N=%ld, block size b=%d, took %lf seconds\n", n, b, elapsed.count());
 #else
-           printf("Problem size N=%ld took %lf seconds", n, elapsed.count());
+           printf("Problem size N=%ld took %lf seconds\n", n, elapsed.count());
 #endif
 
            reference_dgemm(n, 1.0 , Acopy, Bcopy, Ccopy);
