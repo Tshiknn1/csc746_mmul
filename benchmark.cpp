@@ -73,6 +73,7 @@ int main(int argc, char** argv)
         printf("Blocked DGEMM \n");
         for (int b : block_sizes)
         {
+           printf("Working on block size b=%d\n", b)
 #endif
 
            // allocate memory for 6 NxN matrics
@@ -95,6 +96,7 @@ int main(int argc, char** argv)
            memcpy((void *)Ccopy, (const void *)C, sizeof(double)*n*n);
 
            // insert timer code here
+           std::chrono::time_point<std::chrono::high_resolution_clock> start_time = std::chrono::high_resolution_clock::now();
 
 #ifdef BLOCKED
            square_dgemm_blocked(n, b, A, B, C); 
@@ -103,6 +105,14 @@ int main(int argc, char** argv)
 #endif
 
            // insert timer code here
+           std::chrono::time_point<std::chrono::high_resolution_clock> end_time = std::chrono::high_resolution_clock::now();
+           std::chrono::duration<double> elapsed = end_time - start_time;
+
+#ifdef BLOCKED
+           printf("Problem size N=%ld, block size b=%d, took %lf seconds", n, b, elapsed.count());
+#else
+           printf("Problem size N=%ld took %lf seconds", n, elapsed.count());
+#endif
 
            reference_dgemm(n, 1.0 , Acopy, Bcopy, Ccopy);
 
