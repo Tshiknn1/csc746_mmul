@@ -48,8 +48,9 @@ void square_dgemm_blocked(int n, int block_size, double* A, double* B, double* C
 
    for (int i = 0; i < Nb; i++) {   // row
       for (int j = 0; j < Nb; j++) {   // col
+         // calculate this so we store it in register
          int Cpos = i * n * block_size + j * block_size;
-         copy_block(&Cn[0], &C[Cpos], n, block_size);
+         copy_block(Cn, &C[Cpos], n, block_size);
 
          for (int k = 0; k < Nb; k++) {
             copy_block(An, &A[i * n * block_size + k * block_size], n, block_size);
