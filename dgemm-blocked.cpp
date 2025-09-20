@@ -1,10 +1,10 @@
 #include <cstring>
 #include <iostream>
+#include <vector>
 
 const char* dgemm_desc = "Blocked dgemm.";
 
-void square_dgemm_basic(int n, double* A, double* B, double* C) 
-{
+void square_dgemm_basic(int n, double* A, double* B, double* C) {
    for (int i = 0; i < n; i++) { // rows
       for (int j = 0; j < n; j++) { // columns
          double square_sum = C[i*n + j];
@@ -42,9 +42,14 @@ void square_dgemm_blocked(int n, int block_size, double* A, double* B, double* C
    int Nb = n / block_size;
    int block_arr_size = block_size * block_size;
 
-   double* An = new double[block_arr_size];
-   double* Bn = new double[block_arr_size];
-   double* Cn = new double[block_arr_size];
+   std::vector<double> buf(3 * block_arr_size);
+
+   // double* An = new double[block_arr_size];
+   // double* Bn = new double[block_arr_size];
+   // double* Cn = new double[block_arr_size];
+   double* An = buf.data();
+   double* Bn = &An[block_arr_size];
+   double* Cn = &Bn[block_arr_size];
 
    for (int i = 0; i < Nb; i++) {   // row
       for (int j = 0; j < Nb; j++) {   // col
@@ -63,7 +68,7 @@ void square_dgemm_blocked(int n, int block_size, double* A, double* B, double* C
       }
    }
 
-   delete[] An;
-   delete[] Bn;
-   delete[] Cn;
+   // delete[] An;
+   // delete[] Bn;
+   // delete[] Cn;
 }
