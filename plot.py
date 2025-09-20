@@ -29,10 +29,11 @@ parser.add_argument('filename')
 parser.add_argument('-v', '--variable', default='Runtime')
 parser.add_argument('-t', '--title', default='PUT A TITLE YOU DUMB FUCKER')
 parser.add_argument('-i', '--implementations', default='Basic dgemm,Reference dgemm')
+parser.add_argument('-x', '--suffix', default='basic')
 args = parser.parse_args()
 
 fname = args.filename
-plot_fname = fname.split('.')[0] + '.png'
+plot_fname = fname.split('.')[0] + f'_{args.suffix}.png'
 
 df = pd.read_csv(fname, comment="#")
 print(df)
@@ -64,7 +65,7 @@ for idx, impl in enumerate(impls):
 
 
 #plt.xscale("log")
-#plt.yscale("log")
+plt.yscale("log")
 
 plt.xlabel("Problem Sizes")
 plt.ylabel(args.variable)
